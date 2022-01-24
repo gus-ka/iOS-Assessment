@@ -144,9 +144,6 @@
                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <state key="normal" title="Button"/>
                                                                                     <buttonConfiguration key="configuration" style="plain"/>
-                                                                                    <connections>
-                                                                                        <action selector="actionAddToBag:" destination="9fN-Ot-Ptd" eventType="touchUpInside" id="tES-vM-Sc9"/>
-                                                                                    </connections>
                                                                                 </button>
                                                                             </subviews>
                                                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -83,7 +83,7 @@ class YourBag: UIViewController {
         
         total = 0
         for item in dat {
-            total! += ((Double("\(item.total ?? 0)") ?? 0) * (item.price ?? 0))
+            total! += ((Double("\((item.total ?? 0) - 1)") ?? 0) * (item.price ?? 0))
         }
         
         lCheckout.text = "CHECKOUT - $\(total?.string() ?? "0")"
