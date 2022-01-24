@@ -25,6 +25,8 @@ class DetailItemVC: UIViewController {
     var listSize: [String] = []
     var listColor: [String] = []
     
+    var update: ((Bool)->())?
+    
     var toolBar = UIToolbar()
     var pickerView = UIPickerView()
     private var pvDataSource : PickerViewDataSource<String>!
@@ -163,6 +165,7 @@ class DetailItemVC: UIViewController {
     @IBAction func actionFav(_ sender: Any) {
         let product = ProductStore(name: data.name ?? "", category: data.category ?? "", shoeDescription: data.shoeDescription ?? "", price: data.price ?? 0, sizes: "\(lSize.text ?? "0")", colors: "\(data.colors?[indexColor ?? 0].colorHash ?? "#000000")", video:  data.video ?? "", isFav: true, isInTheBag: session.load().contains(where: {$0.name == data.name && $0.isInTheBag == true}), total: 1)
         session.setFav(product)
+        update!(true)
         if session.load().contains(where: {$0.name == data.name && $0.isFav == true}) {
             ivFav.image = UIImage(named: "icon_favorite_on")
         } else {
@@ -171,8 +174,9 @@ class DetailItemVC: UIViewController {
     }
     
     @IBAction func actionAddToBag(_ sender: Any) {
-        let product = ProductStore(name: data.name ?? "", category: data.category ?? "", shoeDescription: data.shoeDescription ?? "", price: data.price ?? 0, sizes: "\(lSize.text ?? "0")", colors: "\(data.colors?[indexColor ?? 0].colorHash ?? "#000000")", video: data.video ?? "", isFav: session.load().contains(where: {$0.name == data.name && $0.isFav == true}), isInTheBag: true, total: 1)
+        let product = ProductStore(name: data.name ?? "", category: data.category ?? "", shoeDescription: data.shoeDescription ?? "", price: data.price ?? 0, sizes: "\(lSize.text ?? "0")", colors: "\(data.colors?[indexColor ?? 0].colorHash ?? "#000000")", video: data.video ?? "", isFav: session.load().contains(where: {$0.name == data.name && $0.isFav == true}), isInTheBag: true, total: 0)
         session.setBag(product)
+        update!(true)
         self.showToast(message: "\(product.name ?? "") added", font: .systemFont(ofSize: 16.0))
     }
 }

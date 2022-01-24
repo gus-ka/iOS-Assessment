@@ -15,6 +15,10 @@ class StoreVC: UIViewController {
     
     private var productViewModel : ProductViewModel!
     
+    let session = Sesion()
+    
+    var update: ((Bool)->())?
+    
     private var dataSource : CollectionViewModel<StoreCollectionViewCell, Shoe>!
     private var delegate : CollectionViewModel<StoreCollectionViewCell, Shoe>!
     
@@ -34,6 +38,12 @@ class StoreVC: UIViewController {
         }
         
         callToViewModelForUIUpdate()
+        
+        self.update = {val in
+            if val {
+                self.updateBadge()
+            }
+        }
     }
 
     func callToViewModelForUIUpdate(){
@@ -43,7 +53,17 @@ class StoreVC: UIViewController {
         }
     }
     
+    func updateBadge() {
+        if let tabItems = self.tabBarController?.tabBar.items {
+            let totl = self.session.loadBag().count
+            let tabItem = tabItems[2]
+            tabItem.badgeValue = totl > 0 ? "\(totl)" : nil
+        }
+    }
+    
     func updateDataSource(){
+        self.updateBadge()
+        
         self.dataSource = CollectionViewModel(cellIdentifier: "StoreCollectionViewCell", items: self.productViewModel.productData.shoes ?? [], configureCell: { (cell, evm, idx) in
             cell.index = idx
             cell.productItem = evm
@@ -54,6 +74,7 @@ class StoreVC: UIViewController {
             let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailItemID") as! DetailItemVC
             detailVC.index = index
             detailVC.data = evm
+            detailVC.update = self.update
             self.present(detailVC, animated: true)
         })
         
@@ -63,5 +84,14 @@ class StoreVC: UIViewController {
             self.productCollectionView.reloadData()
         }
     }
+    
+    @IBAction func actionBtnSort(_ sender: Any) {
+    }
+    
+    @IBAction func actionBtnFilter(_ sender: Any) {
+        let storyboard = UIStoryboard.init(name: "Filter", bundle: Bundle.main)
+        let filterVC = storyboard.instantiateViewController(withIdentifier: "FIlterVC") as! FIlterVC
+        filterVC.modalPresentationStyle = .overCurrentContext
+        self.present(filterVC, animated: true)
+    }
 }
-

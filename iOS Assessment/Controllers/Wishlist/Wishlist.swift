@@ -19,6 +19,8 @@ class Wishlist: UIViewController {
     
     var reqUpdate:((Bool)->())?
     
+    var update: ((Bool)->())?
+    
     private var psDataSource : CollectionViewModel<WishlistCollectionViewCell, ProductStore>!
     private var psDelegate : CollectionViewModel<WishlistCollectionViewCell, ProductStore>!
     
@@ -47,9 +49,15 @@ class Wishlist: UIViewController {
             if val {
                 self.showToast(message: "Item Removed", font: .systemFont(ofSize: 16.0))
                 self.dat = self.session.loadFav()
-                self.cvWishlist.reloadData()
+                self.updateDataSource()
             } else {
                 self.showToast(message: "Item added to the bag", font: .systemFont(ofSize: 16.0))
+            }
+        }
+        self.update = { val in
+            if val {
+                self.dat = self.session.loadFav()
+                self.updateDataSource()
             }
         }
     }
@@ -62,6 +70,12 @@ class Wishlist: UIViewController {
     }
     
     func updateDataSource(){
+        if let tabItems = tabBarController?.tabBar.items {
+            let totl = session.loadBag().count
+            let tabItem = tabItems[2]
+            tabItem.badgeValue = totl > 0 ? "\(totl)" : nil
+        }
+        
         self.psDataSource = CollectionViewModel(cellIdentifier: "WishlistCollectionViewCell", items: dat, configureCell: { (cell, evm, idx) in
             cell.index = idx
             cell.dat = evm
@@ -75,6 +89,7 @@ class Wishlist: UIViewController {
             detailVC.data = self.shoe.first(where: { element in
                 element.name == evm.name
             }) ?? self.shoe.first!
+            detailVC.update = self.update
             self.present(detailVC, animated: true)
         })
         

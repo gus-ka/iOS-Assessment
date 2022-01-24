@@ -10,6 +10,7 @@ import UIKit
 class YourBag: UIViewController {
     
     @IBOutlet weak var cvBag: UICollectionView!
+    @IBOutlet weak var lCheckout: UILabel!
     
     private var productViewModel : ProductViewModel!
     
@@ -17,6 +18,12 @@ class YourBag: UIViewController {
     var dat:[ProductStore] = []
     
     var shoe: [Shoe] = []
+    
+    var total: Double? = 0
+    
+    var delCallback: ((ProductStore)->())?
+    
+    var update: ((Bool)->())?
     
     private var psDataSource : CollectionViewModel<BagCollectionViewCell, ProductStore>!
     private var psDelegate : CollectionViewModel<BagCollectionViewCell, ProductStore>!
@@ -45,6 +52,19 @@ class YourBag: UIViewController {
         }
         callToViewModelForUIUpdate()
         updateDataSource()
+        
+        self.delCallback = {(val) in
+            self.session.remBag(val)
+            self.dat = self.session.loadBag()
+            self.updateDataSource()
+        }
+        
+        self.update = { val in
+            if val {
+                self.dat = self.session.loadBag()
+                self.updateDataSource()
+            }
+        }
     }
     
     func callToViewModelForUIUpdate(){
@@ -55,9 +75,23 @@ class YourBag: UIViewController {
     }
     
     func updateDataSource(){
+        if let tabItems = tabBarController?.tabBar.items {
+            let totl = session.loadBag().count
+            let tabItem = tabItems[2]
+            tabItem.badgeValue = totl > 0 ? "\(totl)" : nil
+        }
+        
+        total = 0
+        for item in dat {
+            total! += ((Double("\(item.total ?? 0)") ?? 0) * (item.price ?? 0))
+        }
+        
+        lCheckout.text = "CHECKOUT - $\(total?.string() ?? "0")"
+        
         self.psDataSource = CollectionViewModel(cellIdentifier: "BagCollectionViewCell", items: dat, configureCell: { (cell, evm, idx) in
             cell.index = idx
             cell.dat = evm
+            cell.delCallback = self.delCallback
         })
         
         self.psDelegate = CollectionViewModel(items: dat, didSelectItemAt: { evm, index in
@@ -67,6 +101,7 @@ class YourBag: UIViewController {
             detailVC.data = self.shoe.first(where: { element in
                 element.name == evm.name
             }) ?? self.shoe.first!
+            detailVC.update = self.update
             self.present(detailVC, animated: true)
         })
         
@@ -76,4 +111,8 @@ class YourBag: UIViewController {
             self.cvBag.reloadData()
         }
     }
+    
+    @IBAction func actionCheckout(_ sender: Any) {
+    }
+    
 }

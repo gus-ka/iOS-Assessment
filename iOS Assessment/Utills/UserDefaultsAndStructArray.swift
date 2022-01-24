@@ -34,7 +34,7 @@ class Sesion {
         var allDat = load()
         if let row = allDat.firstIndex(where: {$0.name == product.name}) {
             let dat = ProductStore(name: product.name, category: product.category, shoeDescription: product.shoeDescription, price: product.price, sizes: product.sizes, colors: product.colors, video: product.video, isFav: (allDat[row].isFav ?? false), isInTheBag: true, total: (allDat[row].total ?? 0) + 1)
-               allDat[row] = dat
+            allDat[row] = dat
             save(allDat)
         }
     }
@@ -43,7 +43,8 @@ class Sesion {
         var allDat = load()
         if let row = allDat.firstIndex(where: {$0.name == product.name}) {
             let dat = ProductStore(name: product.name, category: product.category, shoeDescription: product.shoeDescription, price: product.price, sizes: product.sizes, colors: product.colors, video: product.video, isFav: (allDat[row].isFav ?? false), isInTheBag: false, total: 1)
-               allDat[row] = dat
+            allDat[row] = dat
+            print(allDat)
             save(allDat)
         }
     }

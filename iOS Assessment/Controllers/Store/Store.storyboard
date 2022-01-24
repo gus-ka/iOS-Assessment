@@ -70,6 +70,9 @@
                                                         <rect key="frame" x="37.5" y="7.5" width="130.5" height="30"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain"/>
+                                                        <connections>
+                                                            <action selector="actionBtnFilter:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="lAu-Ao-mcT"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -124,6 +127,9 @@
                                                         <rect key="frame" x="40.5" y="7.5" width="125" height="30"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain"/>
+                                                        <connections>
+                                                            <action selector="actionBtnSort:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Gbw-zR-ric"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
