@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MLD-Cc-b0D">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Store-->
+        <scene sceneID="2xl-UD-6HC">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Store" id="oFD-mP-kuB" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="PRODUCT" image="bn_product" selectedImage="bn_product" id="Cd8-T2-iFV"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OMB-kO-eFt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1494.9275362318842" y="41.517857142857139"/>
+        </scene>
+        <!--Wishlist-->
+        <scene sceneID="LCI-zw-NMx">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Wishlist" id="xar-Hv-mf8" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="WISHLIST" image="bn_wishlist" selectedImage="bn_wishlist" id="dQ7-7K-vo0"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zhT-Fg-Fxn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1526.8115942028987" y="126.5625"/>
+        </scene>
+        <!--YourBag-->
+        <scene sceneID="TZr-uj-Fcr">
+            <objects>
+                <viewControllerPlaceholder storyboardName="YourBag" id="O7q-Uf-VYz" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="CART" image="bn_cart" selectedImage="bn_cart" id="tvw-dD-XvK">
+                        <color key="badgeColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IJD-tR-9UA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1531.1594202898552" y="222.99107142857142"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="Ucr-6z-Q4l">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="MLD-Cc-b0D" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" itemPositioning="fill" id="4n0-Sp-UrS">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <tabBarAppearance key="standardAppearance">
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="shadowColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </tabBarAppearance>
+                    </tabBar>
+                    <connections>
+                        <segue destination="oFD-mP-kuB" kind="relationship" relationship="viewControllers" id="uhb-OZ-4Kk"/>
+                        <segue destination="xar-Hv-mf8" kind="relationship" relationship="viewControllers" id="TqP-Od-mTG"/>
+                        <segue destination="O7q-Uf-VYz" kind="relationship" relationship="viewControllers" id="ZzO-IY-6rs"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CxE-8J-uks" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="100.00000000000001" y="76.339285714285708"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="bn_cart" width="23" height="24"/>
+        <image name="bn_product" width="22" height="22"/>
+        <image name="bn_wishlist" width="24" height="24"/>
+    </resources>
+</document>
